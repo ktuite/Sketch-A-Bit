@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/fetch"  android:title="Fetch inspiration" android:titleCondensed="Fetch"  android:icon="@android:drawable/ic_menu_edit"    />
+<item android:id="@+id/upload" android:title="Upload to service" android:titleCondensed="Upload" android:icon="@android:drawable/ic_menu_upload"  />
+<item android:id="@+id/revert" android:title="Revert to saved"   android:titleCondensed="Revert" android:icon="@android:drawable/ic_menu_revert"  />
+<item android:id="@+id/export" android:title="Export to gallery" android:titleCondensed="Export" android:icon="@android:drawable/ic_menu_gallery" />
+</menu>
