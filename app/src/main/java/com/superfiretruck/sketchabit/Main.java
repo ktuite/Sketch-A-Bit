@@ -78,20 +78,20 @@ public class Main extends Activity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-    	switch(menuItem.getItemId()) {
-    	case R.id.revert:
-    		sketchView.clear();
-    		return true;
-    	case R.id.fetch:
-    		downloadImageFromServer();
-    		return true;
-    	case R.id.upload:
-    		uploadImageToServer();
-    		return true;
-    	case R.id.export:
-    		exportImageToGallery();
-    		return true;
-    	}
+        int itemId = menuItem.getItemId();
+        if (itemId == R.id.revert) {
+            sketchView.clear();
+            return true;
+        } else if (itemId == R.id.fetch) {
+            downloadImageFromServer();
+            return true;
+        } else if (itemId == R.id.upload) {
+            uploadImageToServer();
+            return true;
+        } else if (itemId == R.id.export) {
+            exportImageToGallery();
+            return true;
+        }
     	
     	return false;
     }
