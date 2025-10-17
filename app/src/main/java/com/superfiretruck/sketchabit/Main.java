@@ -35,6 +35,7 @@ public class Main extends Activity {
         
         Button light = (Button)findViewById(R.id.light);
         Button dark = (Button)findViewById(R.id.dark);
+		Button menu = findViewById(R.id.menu);
         
         light.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -45,7 +46,30 @@ public class Main extends Activity {
         dark.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) { sketchView.useDarkerColor(); }
 		});
-    }
+
+		PopupMenu optionsMenu = new PopupMenu(this, menu);
+		optionsMenu.getMenuInflater().inflate(R.menu.sketch_menu, optionsMenu.getMenu());
+		optionsMenu.setOnMenuItemClickListener(menuItem -> {
+            int itemId = menuItem.getItemId();
+            if (itemId == R.id.revert) {
+                sketchView.clear();
+                return true;
+            } else if (itemId == R.id.fetch) {
+                downloadImageFromServer();
+                return true;
+            } else if (itemId == R.id.upload) {
+                uploadImageToServer();
+                return true;
+            } else if (itemId == R.id.export) {
+                exportImageToGallery();
+                return true;
+            }
+
+            return false;
+        });
+
+		menu.setOnClickListener(view -> optionsMenu.show());
+	}
     
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -68,32 +92,6 @@ public class Main extends Activity {
     	super.onSaveInstanceState(savedInstanceState);
     	savedInstanceState.putString("parentId", parentId);
     	savedInstanceState.putParcelable("bitmap", sketchView.exportBitmap());
-    }
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-    	getMenuInflater().inflate(R.menu.sketch_menu, menu);
-    	return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        int itemId = menuItem.getItemId();
-        if (itemId == R.id.revert) {
-            sketchView.clear();
-            return true;
-        } else if (itemId == R.id.fetch) {
-            downloadImageFromServer();
-            return true;
-        } else if (itemId == R.id.upload) {
-            uploadImageToServer();
-            return true;
-        } else if (itemId == R.id.export) {
-            exportImageToGallery();
-            return true;
-        }
-    	
-    	return false;
     }
     
     public void exportImageToGallery(){
